@@ -20,7 +20,7 @@ export default function Reg(props) {
 
       try {
         let res = await axios.post(
-          "http://localhost:3000/api/v1/regression/linear",
+          "https://graduation-project-back-end.vercel.app/api/v1/regression/linear",
           params
         );
 

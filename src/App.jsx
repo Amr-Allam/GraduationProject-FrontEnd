@@ -216,7 +216,8 @@ function App() {
     if (columns.length === 1) {
       // Single sample t-test
       testType = "single";
-      endpoint = "http://localhost:3000/api/v1/tests/single-t-test";
+      endpoint =
+        "https://graduation-project-back-end.vercel.app/api/v1/tests/single-t-test";
       testParams = {
         ...params,
         fileName: fileName,
@@ -225,12 +226,15 @@ function App() {
     } else if (columns.length === 2) {
       // Two sample t-test (paired or independent)
       if (testType === "paired") {
-        endpoint = "http://localhost:3000/api/v1/tests/paired-t-test";
+        endpoint =
+          "https://graduation-project-back-end.vercel.app/api/v1/tests/paired-t-test";
       } else if (testType === "independent") {
-        endpoint = "http://localhost:3000/api/v1/tests/independent-t-test";
+        endpoint =
+          "https://graduation-project-back-end.vercel.app/api/v1/tests/independent-t-test";
       } else {
         // Default to independent if type is not specified
-        endpoint = "http://localhost:3000/api/v1/tests/independent-t-test";
+        endpoint =
+          "https://graduation-project-back-end.vercel.app/api/v1/tests/independent-t-test";
         testType = "independent";
       }
       testParams = {
@@ -285,7 +289,7 @@ function App() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/regression/linear",
+        "https://graduation-project-back-end.vercel.app/api/v1/regression/linear",
         params
       );
       const newResult = { ...res.data.data, id: Date.now() };
@@ -308,7 +312,7 @@ function App() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/tests/kolmogorov-smirnov-test",
+        "https://graduation-project-back-end.vercel.app/api/v1/tests/kolmogorov-smirnov-test",
         params
       );
       const result = res.data.result || res.data.data || res.data;
@@ -352,7 +356,7 @@ function App() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/tests/anova-test",
+        "https://graduation-project-back-end.vercel.app/api/v1/tests/anova-test",
         params
       );
       const result = { ...res.data.result, id: Date.now(), columns };
@@ -381,7 +385,7 @@ function App() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/tests/u-test",
+        "https://graduation-project-back-end.vercel.app/api/v1/tests/u-test",
         params
       );
       setUTestData(res.data);
@@ -405,7 +409,7 @@ function App() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/tests/sign-test",
+        "https://graduation-project-back-end.vercel.app/api/v1/tests/sign-test",
         params
       );
       setSignTestData(res.data);
@@ -429,7 +433,7 @@ function App() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/tests/ranked-sign-test",
+        "https://graduation-project-back-end.vercel.app/api/v1/tests/ranked-sign-test",
         params
       );
       setRankedSignTestData(res.data);
@@ -469,7 +473,7 @@ function App() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/tests/chi-square-test",
+        "https://graduation-project-back-end.vercel.app/api/v1/tests/chi-square-test",
         params
       );
       const result = { ...res.data.result, id: Date.now(), columns, testType };
@@ -495,7 +499,8 @@ function App() {
     if (columns.length === 1 || testType === "single") {
       // Single sample z-test
       testType = "single";
-      endpoint = "http://localhost:3000/api/v1/tests//single-z-test";
+      endpoint =
+        "https://graduation-project-back-end.vercel.app/api/v1/tests//single-z-test";
       testParams = {
         fileName,
         headerNames: [columns[0].trim()],
@@ -508,7 +513,8 @@ function App() {
     } else if (columns.length === 2 || testType === "two-sample") {
       // Two sample z-test
       testType = "two-sample";
-      endpoint = "http://localhost:3000/api/v1/tests/two-sample-z-test";
+      endpoint =
+        "https://graduation-project-back-end.vercel.app/api/v1/tests/two-sample-z-test";
       testParams = {
         fileName,
         headerNames: columns,

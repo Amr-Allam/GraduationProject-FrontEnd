@@ -36,9 +36,13 @@ function FileUpload({ onDataLoaded }) {
     formData.append("message", "Upload successful");
 
     try {
-      const res = await axios.post("http://localhost:3000/api/v1/tests/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const res = await axios.post(
+        "https://graduation-project-back-end.vercel.app/api/v1/tests/upload",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       window.localStorage.setItem("fileName", res.data.files[0]);
     } catch (error) {
       console.error("Error uploading file:", error);
