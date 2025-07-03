@@ -500,7 +500,7 @@ function App() {
       // Single sample z-test
       testType = "single";
       endpoint =
-        "https://graduation-project-back-end.vercel.app/api/v1/tests//single-z-test";
+        "https://graduation-project-back-end.vercel.app/api/v1/tests/single-z-test";
       testParams = {
         fileName,
         headerNames: [columns[0].trim()],
