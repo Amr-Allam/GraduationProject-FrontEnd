@@ -96,7 +96,7 @@ function ProjectPage(props) {
   } = props;
 
   return (
-    <div className='container'>
+    <div className="container">
       <h1>
         Quick Statistics Analysis <br /> (QSA)
       </h1>
@@ -201,7 +201,8 @@ function ProjectPage(props) {
                 onClick={() => {
                   regression(dependentVariable, independentVariables);
                 }}
-                className='run-test-button'>
+                className="run-test-button"
+              >
                 <FaPlay style={{ marginRight: 6 }} /> Run Regression
               </button>
             </div>
@@ -218,8 +219,8 @@ function ProjectPage(props) {
                 />
                 Regression Results
               </h2>
-              <div className='t-test-results fade-in-up  reg'>
-                <table className='t-test-table'>
+              <div className="t-test-results fade-in-up  reg">
+                <table className="t-test-table">
                   <thead>
                     <tr>
                       <th>Coefficient of Determination</th>
@@ -271,7 +272,8 @@ function ProjectPage(props) {
                                     onClick={() =>
                                       handleDeleteRegression(result.id)
                                     }
-                                    title='Delete'>
+                                    title="Delete"
+                                  >
                                     <FaTrash style={{ marginRight: 6 }} />
                                   </button>
                                 </td>
@@ -283,7 +285,7 @@ function ProjectPage(props) {
                             <td>{result.coefficientOfDetermination}</td>
                             <td>{result.intercept}</td>
                             <td>{result.linearRegressionEquation}</td>
-                            <td colSpan='2'>{result.slope || "-"}</td>
+                            <td colSpan="2">{result.slope || "-"}</td>
                             <td>{result.standardError}</td>
                             <td>
                               <button
@@ -296,7 +298,8 @@ function ProjectPage(props) {
                                 onClick={() =>
                                   handleDeleteRegression(result.id)
                                 }
-                                title='Delete'>
+                                title="Delete"
+                              >
                                 <FaTrash style={{ marginRight: 6 }} />
                               </button>
                             </td>
@@ -308,49 +311,49 @@ function ProjectPage(props) {
                 </table>
               </div>
 
-               <>
-            <button
-              className='run-test-button'
-              style={{ marginTop: "1.5rem" }}
-              disabled={regressionExplaining}
-              onClick={async () => {
-                setRegressionExplaining(true);
-                setRegressionExplanation("");
-                const prompt = `Explain the following regression results in simple terms in three lines:\n${JSON.stringify(
-                  regressionData,
-                  null,
-                  2
-                )}`;
-                try {
-                  const response = await fetch(
-                    "http://localhost:4000/generate",
-                    {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({ prompt }),
+              <>
+                <button
+                  className="run-test-button"
+                  style={{ marginTop: "1.5rem" }}
+                  disabled={regressionExplaining}
+                  onClick={async () => {
+                    setRegressionExplaining(true);
+                    setRegressionExplanation("");
+                    const prompt = `Explain the following regression results in simple terms in three lines:\n${JSON.stringify(
+                      regressionData,
+                      null,
+                      2
+                    )}`;
+                    try {
+                      const response = await fetch(
+                        "https://graduation-project-gemini.vercel.app/api/generate",
+                        {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ prompt }),
+                        }
+                      );
+                      const data = await response.json();
+                      setRegressionExplanation(
+                        data.generatedText || "No explanation received."
+                      );
+                    } catch (error) {
+                      setRegressionExplanation("Failed to get explanation.");
                     }
-                  );
-                  const data = await response.json();
-                  setRegressionExplanation(
-                    data.generatedText || "No explanation received."
-                  );
-                } catch (error) {
-                  setRegressionExplanation("Failed to get explanation.");
-                }
-                setRegressionExplaining(false);
-              }}>
-              <FaMagic style={{ marginRight: 6 }} />
-              {regressionExplaining ? "Explaining..." : "Explain Results"}
-            </button>
-            {regressionExplanation && (
-              <div className='test-explanation'>
-                <ExplanationTypewriter text={regressionExplanation} />
-              </div>
-            )}
-          </>
+                    setRegressionExplaining(false);
+                  }}
+                >
+                  <FaMagic style={{ marginRight: 6 }} />
+                  {regressionExplaining ? "Explaining..." : "Explain Results"}
+                </button>
+                {regressionExplanation && (
+                  <div className="test-explanation">
+                    <ExplanationTypewriter text={regressionExplanation} />
+                  </div>
+                )}
+              </>
             </>
           )}
-         
         </>
       )}
     </div>
